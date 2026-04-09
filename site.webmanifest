@@ -1,0 +1,16 @@
+{
+  "name": "Marvis Labs — Software Development",
+  "short_name": "Marvis Labs",
+  "description": "Empresa de desarrollo de software. Mobile apps, web applications & custom software.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "assets/marvis-icon-full.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

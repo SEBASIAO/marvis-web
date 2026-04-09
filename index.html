@@ -3,9 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marvis Labs — Software Development</title>
-  <meta name="description" content="Marvis Labs builds mobile apps, web applications, and digital platforms. We turn your ideas into powerful software.">
+  <title>Marvis Labs — Desarrollo de Software, Apps Móviles y Páginas Web | Software Development Company</title>
+  <meta name="description" content="Marvis Labs: empresa de desarrollo de software. Creamos aplicaciones móviles, aplicaciones web y páginas web profesionales. ¿Cuánto cuesta hacer una app o página web? Contáctanos. Software development company — mobile apps, web apps & custom software.">
+  <meta name="keywords" content="desarrollo de software, hacer una app, crear aplicación móvil, cuánto cuesta una app, cuánto vale hacer una página web, cómo hacer una página web, desarrollo de aplicaciones, empresa de desarrollo, software a la medida, mobile app development, web development, software development company, custom software, Marvis Labs">
+  <meta name="author" content="Marvis Labs">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://www.marvislabs.co/">
+  <link rel="alternate" hreflang="en" href="https://www.marvislabs.co/">
+  <link rel="alternate" hreflang="es" href="https://www.marvislabs.co/">
+  <link rel="alternate" hreflang="x-default" href="https://www.marvislabs.co/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.marvislabs.co/">
+  <meta property="og:title" content="Marvis Labs — Desarrollo de Software & Apps Móviles">
+  <meta property="og:description" content="Creamos aplicaciones móviles, aplicaciones web y páginas web profesionales. Convertimos tus ideas en software potente. We build mobile apps, web apps & custom software.">
+  <meta property="og:image" content="https://www.marvislabs.co/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Marvis Labs">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Marvis Labs — Desarrollo de Software & Apps Móviles">
+  <meta name="twitter:description" content="Creamos aplicaciones móviles, aplicaciones web y páginas web profesionales. We build mobile apps, web apps & custom software.">
+  <meta name="twitter:image" content="https://www.marvislabs.co/assets/og-image.png">
+
+  <!-- Theme & Icons -->
+  <meta name="theme-color" content="#020617">
+  <meta name="msapplication-TileColor" content="#020617">
   <link rel="icon" type="image/svg+xml" href="assets/marvis-icon.svg">
+  <link rel="apple-touch-icon" href="assets/marvis-icon-full.svg">
+  <link rel="manifest" href="site.webmanifest">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,6 +189,10 @@
     .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .mobile-menu.open { max-height: 400px; }
 
+    /* FAQ accordion */
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-content { max-height: 300px; }
+
     /* prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; opacity: 1; transform: none; }
@@ -181,6 +217,7 @@
         <a href="#services" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
         <a href="#projects" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
         <a href="#about" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+        <a href="#faq" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer">FAQ</a>
         <a href="#contact" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
       </div>
 
@@ -207,6 +244,7 @@
         <a href="#services" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
         <a href="#projects" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
         <a href="#about" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+        <a href="#faq" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer">FAQ</a>
         <a href="#contact" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
         <div class="flex items-center gap-3 pt-2">
           <button id="lang-toggle-mobile" class="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer px-3 py-1.5 rounded-lg border border-white/10" aria-label="Toggle language">
@@ -229,18 +267,18 @@
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-24 pb-20">
       <!-- Logo icon -->
       <div class="reveal mb-8 flex justify-center">
-        <img src="assets/marvis-icon-full.svg" alt="Marvis Labs Icon" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl shadow-2xl shadow-brand-blue/20">
+        <img src="assets/marvis-icon-full.svg" alt="Marvis Labs - Empresa de desarrollo de software, aplicaciones móviles y páginas web" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl shadow-2xl shadow-brand-blue/20">
       </div>
 
       <!-- Headline -->
       <h1 class="reveal reveal-delay-1 font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mb-6">
-        <span data-lang-en="We Build Digital" data-lang-es="Construimos Soluciones">We Build Digital</span><br>
-        <span class="bg-gradient-to-r from-brand-blue via-brand-sky to-brand-light bg-clip-text text-transparent" data-lang-en="Solutions That Matter" data-lang-es="Digitales Que Importan">Solutions That Matter</span>
+        <span data-lang-en="We Develop Apps" data-lang-es="Desarrollamos Apps">We Develop Apps</span><br>
+        <span class="bg-gradient-to-r from-brand-blue via-brand-sky to-brand-light bg-clip-text text-transparent" data-lang-en="& Web Software" data-lang-es="& Software Web">& Web Software</span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="reveal reveal-delay-2 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" data-lang-en="From mobile apps to web platforms, we turn your ideas into powerful, scalable software that drives real results." data-lang-es="Desde aplicaciones móviles hasta plataformas web, convertimos tus ideas en software potente y escalable que genera resultados reales.">
-        From mobile apps to web platforms, we turn your ideas into powerful, scalable software that drives real results.
+      <p class="reveal reveal-delay-2 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" data-lang-en="Software development company specializing in mobile applications, web pages, and custom platforms. We turn your ideas into powerful, scalable software." data-lang-es="Empresa de desarrollo de software especializada en aplicaciones móviles, páginas web y plataformas a la medida. Convertimos tus ideas en software potente y escalable.">
+        Software development company specializing in mobile applications, web pages, and custom platforms. We turn your ideas into powerful, scalable software.
       </p>
 
       <!-- CTAs -->
@@ -271,8 +309,8 @@
       <!-- Section header -->
       <div class="text-center mb-16">
         <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="What We Do" data-lang-es="Lo Que Hacemos">What We Do</p>
-        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Our Services" data-lang-es="Nuestros Servicios">Our Services</h2>
-        <p class="reveal reveal-delay-2 text-slate-400 max-w-2xl mx-auto text-lg" data-lang-en="We deliver end-to-end software solutions tailored to your business needs, from concept to launch and beyond." data-lang-es="Entregamos soluciones de software de principio a fin, adaptadas a las necesidades de tu negocio, desde el concepto hasta el lanzamiento y más allá.">
+        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Software Development Services" data-lang-es="Servicios de Desarrollo de Software">Software Development Services</h2>
+        <p class="reveal reveal-delay-2 text-slate-400 max-w-2xl mx-auto text-lg" data-lang-en="We design and develop mobile apps, web applications, professional websites, and custom software tailored to your business." data-lang-es="Diseñamos y desarrollamos aplicaciones móviles, aplicaciones web, páginas web profesionales y software a la medida para tu negocio.">
           We deliver end-to-end software solutions tailored to your business needs, from concept to launch and beyond.
         </p>
       </div>
@@ -350,7 +388,7 @@
           <!-- Project visual header -->
           <div class="relative h-48 bg-gradient-to-br from-brand-navy/60 to-brand-accent/40 flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-[#1D52AA]/40 to-[#4192DF]/30"></div>
-            <img src="assets/rutera-icon.svg" alt="Rutera" class="relative z-10 w-24 h-24 rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300">
+            <img src="assets/rutera-icon.svg" alt="Rutera - Aplicación móvil de gestión de préstamos personales desarrollada por Marvis Labs" class="relative z-10 w-24 h-24 rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300">
           </div>
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -483,6 +521,102 @@
   <!-- Glow divider -->
   <div class="glow-line"></div>
 
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq" class="relative py-24 sm:py-32">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="FAQ" data-lang-es="Preguntas Frecuentes">FAQ</p>
+        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Frequently Asked Questions About Software Development" data-lang-es="Preguntas Frecuentes Sobre Desarrollo de Software">Frequently Asked Questions About Software Development</h2>
+        <p class="reveal reveal-delay-2 text-slate-400 max-w-2xl mx-auto text-lg" data-lang-en="Everything you need to know about building apps, websites, and custom software." data-lang-es="Todo lo que necesitas saber sobre crear apps, páginas web y software a la medida.">
+          Everything you need to know about building apps, websites, and custom software.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="reveal faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="How much does it cost to develop a mobile app?" data-lang-es="&iquest;Cu&aacute;nto cuesta desarrollar una aplicaci&oacute;n m&oacute;vil?">How much does it cost to develop a mobile app?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="The cost of developing a mobile app depends on complexity, features, and platforms (iOS, Android, or both). A basic app can start from a few thousand dollars, while complex platforms with backends, APIs, and integrations require a higher investment. At Marvis Labs we analyze your project and provide a personalized, no-obligation quote." data-lang-es="El costo de desarrollar una aplicaci&oacute;n m&oacute;vil depende de la complejidad, funcionalidades y plataformas (iOS, Android o ambas). Una app b&aacute;sica puede partir desde unos pocos miles de d&oacute;lares, mientras que plataformas complejas con backends, APIs e integraciones requieren una inversi&oacute;n mayor. En Marvis Labs analizamos tu proyecto y te ofrecemos una cotizaci&oacute;n personalizada sin compromiso.">
+              The cost of developing a mobile app depends on complexity, features, and platforms (iOS, Android, or both). A basic app can start from a few thousand dollars, while complex platforms with backends, APIs, and integrations require a higher investment. At Marvis Labs we analyze your project and provide a personalized, no-obligation quote.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="reveal reveal-delay-1 faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="How much does it cost to build a professional website?" data-lang-es="&iquest;Cu&aacute;nto vale hacer una p&aacute;gina web profesional?">How much does it cost to build a professional website?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="The price of a professional website varies by type: a landing page, a corporate site, or an e-commerce platform each have different scopes. Factors include design complexity, number of pages, integrations (payments, CRM, analytics), and whether you need a CMS. Contact us for a free consultation tailored to your needs." data-lang-es="El precio de una p&aacute;gina web profesional var&iacute;a seg&uacute;n el tipo: una landing page, un sitio corporativo o una plataforma e-commerce tienen alcances diferentes. Los factores incluyen complejidad del dise&ntilde;o, n&uacute;mero de p&aacute;ginas, integraciones (pagos, CRM, anal&iacute;tica) y si necesitas un CMS. Cont&aacute;ctanos para una consulta gratuita adaptada a tus necesidades.">
+              The price of a professional website varies by type: a landing page, a corporate site, or an e-commerce platform each have different scopes. Factors include design complexity, number of pages, integrations (payments, CRM, analytics), and whether you need a CMS. Contact us for a free consultation tailored to your needs.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="reveal reveal-delay-1 faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="How do I create a mobile application from scratch?" data-lang-es="&iquest;C&oacute;mo hago para crear una aplicaci&oacute;n m&oacute;vil desde cero?">How do I create a mobile application from scratch?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="Creating a mobile app involves several stages: defining requirements, UI/UX design, development (frontend and backend), testing, and publishing to the App Store and Google Play. You don't need to be technical — at Marvis Labs we handle the entire process. You bring the idea, we build the app." data-lang-es="Crear una aplicaci&oacute;n m&oacute;vil implica varias etapas: definici&oacute;n de requerimientos, dise&ntilde;o UI/UX, desarrollo (frontend y backend), pruebas, y publicaci&oacute;n en App Store y Google Play. No necesitas ser t&eacute;cnico &mdash; en Marvis Labs nos encargamos de todo el proceso. T&uacute; traes la idea, nosotros construimos la app.">
+              Creating a mobile app involves several stages: defining requirements, UI/UX design, development (frontend and backend), testing, and publishing to the App Store and Google Play. You don't need to be technical — at Marvis Labs we handle the entire process. You bring the idea, we build the app.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="reveal reveal-delay-2 faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="How long does it take to develop an app or website?" data-lang-es="&iquest;Cu&aacute;nto tiempo toma desarrollar una app o p&aacute;gina web?">How long does it take to develop an app or website?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="Timelines depend on the project scope. A professional website can be ready in 2-4 weeks. A mobile app MVP typically takes 2-3 months. More complex platforms with multiple integrations can take 4-6 months or more. We work with agile methodologies to deliver incremental value from the first weeks." data-lang-es="Los tiempos dependen del alcance del proyecto. Una p&aacute;gina web profesional puede estar lista en 2-4 semanas. Un MVP de aplicaci&oacute;n m&oacute;vil toma t&iacute;picamente 2-3 meses. Plataformas m&aacute;s complejas con m&uacute;ltiples integraciones pueden tomar 4-6 meses o m&aacute;s. Trabajamos con metodolog&iacute;as &aacute;giles para entregar valor incremental desde las primeras semanas.">
+              Timelines depend on the project scope. A professional website can be ready in 2-4 weeks. A mobile app MVP typically takes 2-3 months. More complex platforms with multiple integrations can take 4-6 months or more. We work with agile methodologies to deliver incremental value from the first weeks.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="reveal reveal-delay-2 faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="What is custom software development and why do I need it?" data-lang-es="&iquest;Qu&eacute; es el desarrollo de software a la medida y por qu&eacute; lo necesito?">What is custom software development and why do I need it?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="Custom software is built specifically for your business needs, unlike off-the-shelf solutions. It adapts to your unique processes, scales with your growth, and gives you a competitive advantage. It's ideal when existing tools don't cover your requirements or when you need seamless integrations between systems." data-lang-es="El software a la medida se construye espec&iacute;ficamente para las necesidades de tu negocio, a diferencia de soluciones gen&eacute;ricas. Se adapta a tus procesos &uacute;nicos, escala con tu crecimiento y te da una ventaja competitiva. Es ideal cuando las herramientas existentes no cubren tus requerimientos o cuando necesitas integraciones fluidas entre sistemas.">
+              Custom software is built specifically for your business needs, unlike off-the-shelf solutions. It adapts to your unique processes, scales with your growth, and gives you a competitive advantage. It's ideal when existing tools don't cover your requirements or when you need seamless integrations between systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="reveal reveal-delay-3 faq-item glass rounded-2xl overflow-hidden">
+          <button class="faq-toggle w-full flex items-center justify-between p-6 text-left cursor-pointer" aria-expanded="false">
+            <h3 class="font-heading font-semibold text-base sm:text-lg pr-4" data-lang-en="Do you develop for both iOS and Android?" data-lang-es="&iquest;Desarrollan para iOS y Android?">Do you develop for both iOS and Android?</h3>
+            <svg class="faq-icon w-5 h-5 text-brand-sky shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+          </button>
+          <div class="faq-content px-6 pb-0 max-h-0 overflow-hidden transition-all duration-300">
+            <p class="text-slate-400 text-sm leading-relaxed pb-6" data-lang-en="Yes. We build native and cross-platform mobile applications for both iOS (iPhone, iPad) and Android. Using modern frameworks, we can develop for both platforms simultaneously, reducing costs and time to market while maintaining excellent performance and user experience." data-lang-es="S&iacute;. Desarrollamos aplicaciones m&oacute;viles nativas y multiplataforma tanto para iOS (iPhone, iPad) como para Android. Usando frameworks modernos, podemos desarrollar para ambas plataformas simult&aacute;neamente, reduciendo costos y tiempo de lanzamiento mientras mantenemos un excelente rendimiento y experiencia de usuario.">
+              Yes. We build native and cross-platform mobile applications for both iOS (iPhone, iPad) and Android. Using modern frameworks, we can develop for both platforms simultaneously, reducing costs and time to market while maintaining excellent performance and user experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-line"></div>
+
   <!-- ==================== CONTACT ==================== -->
   <section id="contact" class="relative py-24 sm:py-32 overflow-hidden">
     <!-- Background accent -->
@@ -531,6 +665,7 @@
           <a href="#services" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
           <a href="#projects" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
           <a href="#about" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+          <a href="#faq" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer">FAQ</a>
           <a href="mailto:marvislabs26@gmail.com" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
         </div>
       </div>
@@ -616,6 +751,193 @@
       }
       lastScroll = currentScroll;
     }, { passive: true });
+
+    // ==== FAQ Accordion ====
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+        });
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+  <!-- ==================== STRUCTURED DATA (JSON-LD) ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Marvis Labs",
+    "url": "https://www.marvislabs.co",
+    "logo": "https://www.marvislabs.co/assets/marvis-icon-full.svg",
+    "email": "marvislabs26@gmail.com",
+    "description": "Software development company specializing in mobile applications, web applications, websites, and custom software. Empresa de desarrollo de software.",
+    "knowsAbout": [
+      "Mobile App Development",
+      "Web Application Development",
+      "Website Development",
+      "Custom Software Development",
+      "iOS Development",
+      "Android Development",
+      "UI/UX Design",
+      "Desarrollo de aplicaciones móviles",
+      "Desarrollo web",
+      "Software a la medida"
+    ],
+    "sameAs": []
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Marvis Labs",
+    "url": "https://www.marvislabs.co",
+    "logo": "https://www.marvislabs.co/assets/marvis-icon-full.svg",
+    "email": "marvislabs26@gmail.com",
+    "description": "Empresa de desarrollo de software. Creamos aplicaciones móviles, aplicaciones web, páginas web y software a la medida. Software development company.",
+    "priceRange": "$$",
+    "serviceType": [
+      "Mobile App Development",
+      "Web Development",
+      "Custom Software Development",
+      "Desarrollo de aplicaciones móviles",
+      "Desarrollo de páginas web",
+      "Desarrollo de software a la medida"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Software Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Mobile Application Development",
+            "description": "Native and cross-platform mobile app development for iOS and Android. Desarrollo de aplicaciones móviles nativas y multiplataforma."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Web Application Development",
+            "description": "Scalable web platforms, SaaS products, and business systems. Plataformas web escalables, productos SaaS y sistemas empresariales."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Development",
+            "description": "Professional websites, landing pages, and e-commerce sites. Páginas web profesionales, landing pages y sitios e-commerce."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Software Development",
+            "description": "Tailored software solutions, APIs, and system integrations. Software a la medida, APIs e integraciones de sistemas."
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuánto cuesta desarrollar una aplicación móvil?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El costo de desarrollar una aplicación móvil depende de la complejidad, funcionalidades y plataformas (iOS, Android o ambas). Una app básica puede partir desde unos pocos miles de dólares, mientras que plataformas complejas con backends, APIs e integraciones requieren una inversión mayor. En Marvis Labs analizamos tu proyecto y te ofrecemos una cotización personalizada sin compromiso."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto vale hacer una página web profesional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El precio de una página web profesional varía según el tipo: una landing page, un sitio corporativo o una plataforma e-commerce tienen alcances diferentes. Los factores incluyen complejidad del diseño, número de páginas, integraciones (pagos, CRM, analítica) y si necesitas un CMS. Contáctanos para una consulta gratuita adaptada a tus necesidades."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo hago para crear una aplicación móvil desde cero?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Crear una aplicación móvil implica varias etapas: definición de requerimientos, diseño UI/UX, desarrollo (frontend y backend), pruebas, y publicación en App Store y Google Play. No necesitas ser técnico — en Marvis Labs nos encargamos de todo el proceso. Tú traes la idea, nosotros construimos la app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tiempo toma desarrollar una app o página web?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Los tiempos dependen del alcance del proyecto. Una página web profesional puede estar lista en 2-4 semanas. Un MVP de aplicación móvil toma típicamente 2-3 meses. Plataformas más complejas con múltiples integraciones pueden tomar 4-6 meses o más. Trabajamos con metodologías ágiles para entregar valor incremental desde las primeras semanas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué es el desarrollo de software a la medida y por qué lo necesito?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El software a la medida se construye específicamente para las necesidades de tu negocio, a diferencia de soluciones genéricas. Se adapta a tus procesos únicos, escala con tu crecimiento y te da una ventaja competitiva. Es ideal cuando las herramientas existentes no cubren tus requerimientos o cuando necesitas integraciones fluidas entre sistemas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Desarrollan para iOS y Android?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Desarrollamos aplicaciones móviles nativas y multiplataforma tanto para iOS (iPhone, iPad) como para Android. Usando frameworks modernos, podemos desarrollar para ambas plataformas simultáneamente, reduciendo costos y tiempo de lanzamiento mientras mantenemos un excelente rendimiento y experiencia de usuario."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to develop a mobile app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The cost of developing a mobile app depends on complexity, features, and platforms (iOS, Android, or both). A basic app can start from a few thousand dollars, while complex platforms with backends, APIs, and integrations require a higher investment. At Marvis Labs we analyze your project and provide a personalized, no-obligation quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to build a professional website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The price of a professional website varies by type: a landing page, a corporate site, or an e-commerce platform each have different scopes. Factors include design complexity, number of pages, integrations (payments, CRM, analytics), and whether you need a CMS. Contact us for a free consultation tailored to your needs."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Marvis Labs",
+    "url": "https://www.marvislabs.co",
+    "inLanguage": ["en", "es"],
+    "description": "Marvis Labs — Software Development Company. Empresa de desarrollo de software, aplicaciones móviles y páginas web."
+  }
   </script>
 </body>
 </html>
