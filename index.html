@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -71,12 +71,13 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: #020617; color: #f1f5f9; overflow-x: hidden; }
 
-    /* Animated gradient background for hero */
+    /* Hero background: cleaner, more corporate */
     .hero-gradient {
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(4,102,236,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(15,160,251,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(0,67,188,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 74% 52% at 50% 14%, rgba(15,160,251,0.14) 0%, rgba(15,160,251,0.06) 36%, transparent 66%),
+        radial-gradient(ellipse 58% 46% at 16% 22%, rgba(4,102,236,0.09) 0%, transparent 66%),
+        radial-gradient(ellipse 52% 40% at 86% 28%, rgba(2,77,202,0.08) 0%, transparent 70%),
+        linear-gradient(180deg, #030918 0%, #020c25 44%, #020617 100%),
         #020617;
     }
 
@@ -117,42 +118,93 @@
     /* Grid mesh subtle pattern */
     .mesh-bg {
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
+        linear-gradient(rgba(148,163,184,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,0.035) 1px, transparent 1px);
+      background-size: 96px 96px;
+      background-color: #020617;
     }
 
     /* Floating orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      animation: float 8s ease-in-out infinite;
+      filter: blur(118px);
+      opacity: 0.16;
+      animation: float 15s ease-in-out infinite;
+      will-change: transform;
     }
     .orb-1 {
-      width: 400px; height: 400px;
+      width: 340px; height: 340px;
       background: #0466EC;
-      top: 10%; left: -5%;
+      top: 7%; left: -10%;
       animation-delay: 0s;
     }
     .orb-2 {
-      width: 300px; height: 300px;
+      width: 260px; height: 260px;
       background: #0FA0FB;
-      top: 40%; right: -5%;
-      animation-delay: -3s;
+      top: 56%; right: -8%;
+      animation-delay: -5s;
     }
     .orb-3 {
-      width: 250px; height: 250px;
+      width: 220px; height: 220px;
       background: #024DCA;
-      bottom: 10%; left: 30%;
-      animation-delay: -5s;
+      bottom: 6%; left: 14%;
+      animation-delay: -9s;
     }
     @keyframes float {
       0%, 100% { transform: translate(0, 0); }
-      33% { transform: translate(20px, -20px); }
-      66% { transform: translate(-15px, 15px); }
+      33% { transform: translate(12px, -10px); }
+      66% { transform: translate(-10px, 9px); }
     }
+
+    /* Financial symbols background (hero) */
+    .finance-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.8) 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.8) 60%, transparent 100%);
+    }
+
+    .finance-symbol {
+      position: absolute;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: rgba(144, 213, 252, 0.17);
+      text-shadow: 0 0 24px rgba(15, 160, 251, 0.12);
+      animation: float-symbol var(--dur, 18s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      transform: translate3d(0, 0, 0);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .finance-symbol.soft {
+      color: rgba(110, 200, 253, 0.12);
+      text-shadow: 0 0 18px rgba(15, 160, 251, 0.08);
+    }
+
+    @keyframes float-symbol {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); opacity: 0.32; }
+      30% { transform: translate3d(12px, -14px, 0) rotate(1deg); opacity: 0.5; }
+      65% { transform: translate3d(-10px, 9px, 0) rotate(-1deg); opacity: 0.38; }
+    }
+
+    .finance-symbol:nth-child(1) { top: 12%; left: 8%; font-size: 28px; --dur: 19s; --delay: -4s; }
+    .finance-symbol:nth-child(2) { top: 18%; left: 26%; font-size: 16px; --dur: 16s; --delay: -8s; }
+    .finance-symbol:nth-child(3) { top: 9%; right: 17%; font-size: 24px; --dur: 21s; --delay: -3s; }
+    .finance-symbol:nth-child(4) { top: 30%; left: 14%; font-size: 20px; --dur: 17s; --delay: -7s; }
+    .finance-symbol:nth-child(5) { top: 34%; right: 10%; font-size: 30px; --dur: 22s; --delay: -11s; }
+    .finance-symbol:nth-child(6) { top: 43%; left: 6%; font-size: 15px; --dur: 18s; --delay: -5s; }
+    .finance-symbol:nth-child(7) { top: 48%; left: 30%; font-size: 26px; --dur: 20s; --delay: -9s; }
+    .finance-symbol:nth-child(8) { top: 53%; right: 24%; font-size: 17px; --dur: 15s; --delay: -6s; }
+    .finance-symbol:nth-child(9) { top: 61%; right: 9%; font-size: 21px; --dur: 19s; --delay: -12s; }
+    .finance-symbol:nth-child(10) { top: 67%; left: 19%; font-size: 29px; --dur: 23s; --delay: -8s; }
+    .finance-symbol:nth-child(11) { top: 74%; right: 34%; font-size: 16px; --dur: 16s; --delay: -10s; }
+    .finance-symbol:nth-child(12) { top: 78%; left: 44%; font-size: 24px; --dur: 18s; --delay: -13s; }
 
     /* Glow line */
     .glow-line {
@@ -193,10 +245,88 @@
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-item.open .faq-content { max-height: 300px; }
 
+    /* Rutera showcase */
+    .rutera-showcase-wrap {
+      background:
+        radial-gradient(ellipse 90% 75% at 22% 28%, rgba(4,102,236,0.16) 0%, transparent 64%),
+        radial-gradient(ellipse 80% 65% at 82% 60%, rgba(15,160,251,0.12) 0%, transparent 60%),
+        rgba(2, 6, 23, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .rutera-phone-shell {
+      width: min(100%, 260px);
+      margin-inline: auto;
+      border-radius: 34px;
+      padding: 10px;
+      background: linear-gradient(145deg, rgba(148,163,184,0.35), rgba(15,23,42,0.7));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45);
+    }
+
+    .rutera-phone-screen {
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, #f2fbff 0%, #e6f7ff 42%, #f8fbff 100%);
+      color: #0f172a;
+      min-height: 525px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .rutera-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(2, 6, 23, 0.85);
+    }
+
+    .rutera-preview-card {
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 24px rgba(4, 102, 236, 0.08);
+    }
+
+    .rutera-feature-item {
+      width: 100%;
+      text-align: left;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(15, 23, 42, 0.3);
+      padding: 14px 14px 13px;
+      transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+      cursor: pointer;
+    }
+
+    .rutera-feature-item:hover {
+      border-color: rgba(15, 160, 251, 0.38);
+      background: rgba(15, 23, 42, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .rutera-feature-item.is-active {
+      border-color: rgba(15, 160, 251, 0.6);
+      background: rgba(13, 37, 80, 0.68);
+      box-shadow: 0 0 0 1px rgba(15,160,251,0.24), 0 0 28px rgba(15,160,251,0.2);
+    }
+
+    .rutera-feature-item.is-active .rutera-feature-title {
+      color: #d9f5ff;
+    }
+
+    .rutera-feature-item.is-active .rutera-feature-copy {
+      color: #94cfe9;
+    }
+
     /* prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; opacity: 1; transform: none; }
       .orb { animation: none; }
+      .finance-symbol { animation: none; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -258,11 +388,25 @@
   </nav>
 
   <!-- ==================== HERO ==================== -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
+  <section id="hero" class="relative min-h-[88vh] lg:min-h-[84vh] flex items-center justify-center hero-gradient overflow-hidden">
     <!-- Floating orbs -->
     <div class="orb orb-1" aria-hidden="true"></div>
     <div class="orb orb-2" aria-hidden="true"></div>
     <div class="orb orb-3" aria-hidden="true"></div>
+    <div class="finance-layer" aria-hidden="true">
+      <span class="finance-symbol">$</span>
+      <span class="finance-symbol soft">+18%</span>
+      <span class="finance-symbol">€</span>
+      <span class="finance-symbol soft">COP</span>
+      <span class="finance-symbol">₿</span>
+      <span class="finance-symbol soft">+7.2%</span>
+      <span class="finance-symbol">%</span>
+      <span class="finance-symbol soft">¥</span>
+      <span class="finance-symbol">$</span>
+      <span class="finance-symbol soft">+12%</span>
+      <span class="finance-symbol">₡</span>
+      <span class="finance-symbol soft">USD</span>
+    </div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-24 pb-20">
       <!-- Logo icon -->
@@ -479,6 +623,116 @@
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
         </a>
         <p class="text-slate-500 text-sm mt-3" data-lang-en="Tell us your idea and we'll make it happen" data-lang-es="Cuéntanos tu idea y la haremos realidad">Tell us your idea and we'll make it happen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RUTERA FEATURES ==================== -->
+  <section id="rutera-features" class="relative py-24 sm:py-32 overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-24 -left-20 w-72 h-72 bg-brand-blue/20 blur-[120px] rounded-full"></div>
+      <div class="absolute bottom-20 -right-24 w-72 h-72 bg-brand-sky/20 blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="Inside Rutera" data-lang-es="Rutera por Dentro">Inside Rutera</p>
+        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Know Every Core Function" data-lang-es="Conoce Todas Sus Funciones">Know Every Core Function</h2>
+        <p class="reveal reveal-delay-2 text-slate-400 max-w-3xl mx-auto text-lg" data-lang-en="A modern and fast interface built for route lenders. Explore the key modules that let you manage clients, payments, and collection performance in one place." data-lang-es="Una interfaz moderna y rápida para ruteros. Explora los módulos clave para gestionar clientes, pagos y rendimiento de cobros en un solo lugar.">
+          A modern and fast interface built for route lenders. Explore the key modules that let you manage clients, payments, and collection performance in one place.
+        </p>
+      </div>
+
+      <div class="reveal reveal-delay-2 rutera-showcase-wrap rounded-3xl p-5 sm:p-8 lg:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[300px,1fr] gap-8 lg:gap-10 items-start lg:items-center">
+          <div class="reveal lg:self-stretch flex flex-col items-center justify-center">
+            <div class="rutera-phone-shell">
+              <div class="rutera-phone-screen px-4 pt-8 pb-4">
+                <div class="rutera-notch"></div>
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-600 mb-4">
+                  <span>9:41</span>
+                  <span>Rutera OS</span>
+                </div>
+
+                <div class="rutera-preview-card rounded-2xl p-4 mb-3">
+                  <p class="text-[11px] uppercase tracking-[0.16em] text-slate-500 mb-2" data-lang-en="Current module" data-lang-es="Módulo actual">Current module</p>
+                  <h3 id="rutera-preview-title" class="font-heading font-bold text-lg text-slate-900 leading-tight mb-2">Dashboard Principal</h3>
+                  <p id="rutera-preview-copy" class="text-[13px] text-slate-700 leading-relaxed">
+                    Visualiza cobros del día, tareas urgentes y el estado general de tu ruta en segundos.
+                  </p>
+                </div>
+
+                <div class="rutera-preview-card rounded-2xl p-4">
+                  <p class="text-[11px] uppercase tracking-[0.16em] text-slate-500 mb-2" data-lang-en="What you can do" data-lang-es="Lo que puedes hacer">What you can do</p>
+                  <ul id="rutera-preview-points" class="space-y-2 text-[12px] text-slate-700">
+                    <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue shrink-0"></span><span>Sigue el recaudo del día por cliente.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue shrink-0"></span><span>Revisa cuotas pendientes y vencidas.</span></li>
+                    <li class="flex items-start gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue shrink-0"></span><span>Lanza acciones rápidas sin salir del inicio.</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500 text-center mt-4" data-lang-en="Interactive live preview of app modules" data-lang-es="Vista interactiva de módulos de la app">Interactive live preview of app modules</p>
+          </div>
+
+          <div class="space-y-3">
+            <button type="button" class="rutera-feature-item is-active reveal" data-title-en="Main Dashboard" data-title-es="Dashboard Principal" data-copy-en="See daily collections, urgent tasks, and the real status of your route in seconds." data-copy-es="Visualiza cobros del día, tareas urgentes y el estado real de tu ruta en segundos." data-points-en="Track today's collected amount by client.||Review pending and overdue installments.||Launch quick actions from home." data-points-es="Sigue el recaudo del día por cliente.||Revisa cuotas pendientes y vencidas.||Lanza acciones rápidas sin salir del inicio.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Main Dashboard" data-lang-es="Dashboard Principal">Main Dashboard</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Collections progress, pending installments, and key business indicators in one view." data-lang-es="Progreso de cobros, cuotas pendientes e indicadores del negocio en una sola vista.">Collections progress, pending installments, and key business indicators in one view.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-1" data-title-en="Reports & Charts" data-title-es="Reportes y Gráficas" data-copy-en="Analyze net profit, payment methods, and daily cash flow with real-time visual reports." data-copy-es="Analiza ganancia neta, métodos de pago y flujo diario con reportes visuales en tiempo real." data-points-en="Compare collection totals by date range.||Identify trends in payment behavior.||Export key indicators for control." data-points-es="Compara totales de cobro por rango de fechas.||Identifica tendencias en comportamiento de pago.||Exporta indicadores clave para control.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Reports & Charts" data-lang-es="Reportes y Gráficas">Reports & Charts</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Daily performance insights to make better lending and collection decisions." data-lang-es="Métricas de rendimiento diario para tomar mejores decisiones de préstamo y cobro.">Daily performance insights to make better lending and collection decisions.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-1" data-title-en="Client Management" data-title-es="Gestión de Clientes" data-copy-en="Organize all borrowers with filters by status, last payment, route, and payment behavior." data-copy-es="Organiza todos tus clientes con filtros por estado, último pago, ruta y comportamiento." data-points-en="Find clients in seconds with smart filters.||Label risk profiles and collection priority.||Access each profile from a single list." data-points-es="Encuentra clientes en segundos con filtros inteligentes.||Etiqueta perfiles de riesgo y prioridad de cobro.||Accede a cada perfil desde una sola lista.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Client Management" data-lang-es="Gestión de Clientes">Client Management</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Total control of your customer base and collection priorities." data-lang-es="Control total de tu cartera y prioridades de cobro.">Total control of your customer base and collection priorities.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-2" data-title-en="Client Profile" data-title-es="Perfil del Cliente" data-copy-en="Open a complete file with active loans, payment history, debt balance, and contact data." data-copy-es="Abre un perfil completo con créditos activos, historial de pagos, saldo y datos de contacto." data-points-en="View active and closed loans.||Review payment history by installment.||Keep notes and follow-up details." data-points-es="Consulta créditos activos y cerrados.||Revisa historial de abonos por cuota.||Guarda notas y seguimiento comercial.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Client Profile" data-lang-es="Perfil del Cliente">Client Profile</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Everything about each borrower in one screen." data-lang-es="Todo sobre cada cliente en una sola pantalla.">Everything about each borrower in one screen.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-2" data-title-en="Payment Plan" data-title-es="Plan de Pagos" data-copy-en="Control due, paid, and overdue installments with clear breakdowns of capital and interest." data-copy-es="Controla cuotas por vencer, pagadas y vencidas con desglose claro de capital e interés." data-points-en="Visual calendar of each installment.||Breakdown by principal and interest.||Alerts for overdue payments." data-points-es="Calendario visual de cada cuota.||Desglose por capital e interés.||Alertas para pagos vencidos.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Payment Plan" data-lang-es="Plan de Pagos">Payment Plan</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Clear installment visibility to reduce arrears and improve recovery." data-lang-es="Visibilidad clara de cuotas para reducir mora y mejorar recuperación.">Clear installment visibility to reduce arrears and improve recovery.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-2" data-title-en="Payment Register" data-title-es="Registro de Abonos" data-copy-en="Record payments with automatic calculations and instant receipt generation by payment method." data-copy-es="Registra abonos con cálculo automático y genera recibo al instante según método de pago." data-points-en="Apply payment in a few taps.||Automatic distribution to capital/interest.||Save transaction history instantly." data-points-es="Aplica pagos en pocos toques.||Distribución automática capital/interés.||Guarda historial de transacción al instante.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Payment Register" data-lang-es="Registro de Abonos">Payment Register</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Fast payment capture for field collections." data-lang-es="Captura de pagos rápida para cobros en calle.">Fast payment capture for field collections.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-3" data-title-en="Professional Receipts" data-title-es="Recibos Profesionales" data-copy-en="Generate receipts in PDF, image, or POS format and share them instantly via WhatsApp or print." data-copy-es="Genera recibos en PDF, imagen o POS y compártelos al instante por WhatsApp o impresora." data-points-en="Branded receipt formats ready to send.||Share via WhatsApp in one step.||Print receipts from portable printers." data-points-es="Formatos de recibo listos para enviar.||Comparte por WhatsApp en un paso.||Imprime en impresoras portátiles.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Professional Receipts" data-lang-es="Recibos Profesionales">Professional Receipts</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Deliver trust with every payment confirmation." data-lang-es="Genera confianza con cada confirmación de pago.">Deliver trust with every payment confirmation.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-3" data-title-en="Business Status" data-title-es="Estado del Negocio" data-copy-en="Monitor capital on the street, recovered totals, collected interest, and real profitability." data-copy-es="Monitorea capital en calle, total recuperado, interés cobrado y rentabilidad real del negocio." data-points-en="See available capital versus active debt.||Measure recovery and earnings ratios.||Detect portfolio risk early." data-points-es="Ve capital disponible versus deuda activa.||Mide recuperación y margen de ganancia.||Detecta riesgo de cartera temprano.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Business Status" data-lang-es="Estado del Negocio">Business Status</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="A financial cockpit for daily lending operations." data-lang-es="Un cockpit financiero para la operación diaria de préstamos.">A financial cockpit for daily lending operations.</p>
+            </button>
+
+            <button type="button" class="rutera-feature-item reveal reveal-delay-3" data-title-en="Smart Opportunities" data-title-es="Gestión Inteligente" data-copy-en="Identify high-potential clients, unpaid balances, and next opportunities to increase monthly income." data-copy-es="Identifica clientes de alto potencial, saldos sin cerrar y oportunidades para subir ingreso mensual." data-points-en="Highlight clients ready for new credit.||Prioritize high-impact collection actions.||Project expected monthly collections." data-points-es="Destaca clientes listos para nuevo crédito.||Prioriza acciones de cobro de mayor impacto.||Proyecta cobro mensual esperado.">
+              <h3 class="rutera-feature-title font-heading font-semibold text-base text-slate-100 mb-1" data-lang-en="Smart Opportunities" data-lang-es="Gestión Inteligente">Smart Opportunities</h3>
+              <p class="rutera-feature-copy text-sm text-slate-400 leading-relaxed" data-lang-en="Operational intelligence to keep growing your route." data-lang-es="Inteligencia operativa para hacer crecer tu ruta.">Operational intelligence to keep growing your route.</p>
+            </button>
+
+            <div class="pt-3 flex flex-wrap gap-3">
+              <a href="https://play.google.com/store/apps/details?id=com.rutera.app&hl=es_CO" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-slate-200 border border-white/10 hover:border-brand-sky/40 bg-white/5 hover:bg-white/10 px-4 py-2.5 rounded-xl transition-all duration-200">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.794-2.302 2.794-2.302zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                <span>Google Play</span>
+              </a>
+              <a href="https://apps.apple.com/co/app/rutera/id6761193960" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-slate-200 border border-white/10 hover:border-brand-sky/40 bg-white/5 hover:bg-white/10 px-4 py-2.5 rounded-xl transition-all duration-200">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <span>App Store</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -882,6 +1136,10 @@
       document.querySelectorAll('.lang-label-sync').forEach(el => {
         el.textContent = lang.toUpperCase();
       });
+
+      if (typeof window.updateRuteraShowcaseLanguage === 'function') {
+        window.updateRuteraShowcaseLanguage();
+      }
     }
 
     // Apply detected language on load
@@ -963,6 +1221,68 @@
         }
       });
     });
+
+    // ==== Rutera Feature Showcase ====
+    const ruteraFeatureButtons = Array.from(document.querySelectorAll('.rutera-feature-item'));
+    const ruteraPreviewTitle = document.getElementById('rutera-preview-title');
+    const ruteraPreviewCopy = document.getElementById('rutera-preview-copy');
+    const ruteraPreviewPoints = document.getElementById('rutera-preview-points');
+
+    function renderRuteraPreview(button) {
+      if (!button || !ruteraPreviewTitle || !ruteraPreviewCopy || !ruteraPreviewPoints) return;
+
+      const title = button.getAttribute(`data-title-${currentLang}`) || button.getAttribute('data-title-es') || '';
+      const copy = button.getAttribute(`data-copy-${currentLang}`) || button.getAttribute('data-copy-es') || '';
+      const pointsRaw = button.getAttribute(`data-points-${currentLang}`) || button.getAttribute('data-points-es') || '';
+
+      ruteraPreviewTitle.textContent = title;
+      ruteraPreviewCopy.textContent = copy;
+      ruteraPreviewPoints.innerHTML = '';
+
+      pointsRaw
+        .split('||')
+        .map(point => point.trim())
+        .filter(Boolean)
+        .forEach(point => {
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-2';
+
+          const dot = document.createElement('span');
+          dot.className = 'mt-1 h-1.5 w-1.5 rounded-full bg-brand-blue shrink-0';
+
+          const text = document.createElement('span');
+          text.textContent = point;
+
+          li.append(dot, text);
+          ruteraPreviewPoints.appendChild(li);
+        });
+    }
+
+    function setRuteraActiveFeature(button) {
+      if (!button) return;
+      ruteraFeatureButtons.forEach(el => el.classList.remove('is-active'));
+      button.classList.add('is-active');
+      renderRuteraPreview(button);
+    }
+
+    window.updateRuteraShowcaseLanguage = function () {
+      const activeButton = ruteraFeatureButtons.find(el => el.classList.contains('is-active')) || ruteraFeatureButtons[0];
+      renderRuteraPreview(activeButton);
+    };
+
+    if (ruteraFeatureButtons.length > 0) {
+      ruteraFeatureButtons.forEach(button => {
+        button.addEventListener('click', () => setRuteraActiveFeature(button));
+        button.addEventListener('mouseenter', () => {
+          if (window.matchMedia('(hover: hover)').matches) {
+            setRuteraActiveFeature(button);
+          }
+        });
+      });
+
+      const initialButton = ruteraFeatureButtons.find(el => el.classList.contains('is-active')) || ruteraFeatureButtons[0];
+      setRuteraActiveFeature(initialButton);
+    }
 
     // ==== Contact Form (AJAX submit) ====
     const contactForm = document.getElementById('contact-form');
@@ -1246,3 +1566,4 @@
   </script>
 </body>
 </html>
+
