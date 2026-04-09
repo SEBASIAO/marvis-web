@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -744,22 +744,80 @@
         Have a project in mind? We'd love to hear about it. Reach out and let's turn your vision into reality.
       </p>
 
-      <!-- Contact card -->
-      <div class="reveal reveal-delay-3 glass rounded-2xl p-8 sm:p-10 max-w-lg mx-auto">
-        <div class="flex flex-col items-center gap-6">
-          <div class="w-14 h-14 rounded-xl bg-brand-blue/15 flex items-center justify-center">
-            <svg class="w-7 h-7 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <!-- Contact form -->
+      <div class="reveal reveal-delay-3 glass rounded-2xl p-8 sm:p-10 max-w-xl mx-auto text-left">
+        <form id="contact-form" action="https://formsubmit.co/marvislabs26@gmail.com" method="POST">
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde marvislabs.co">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="_next" value="https://www.marvislabs.co/#contact">
+          <input type="text" name="_honey" style="display:none">
+
+          <div class="space-y-5">
+            <!-- Name -->
+            <div>
+              <label for="name" class="block text-sm font-medium text-slate-300 mb-1.5" data-lang-en="Name" data-lang-es="Nombre">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-sky/50 focus:ring-1 focus:ring-brand-sky/30 transition-colors duration-200 text-sm"
+                data-placeholder-en="Your full name" data-placeholder-es="Tu nombre completo" placeholder="Tu nombre completo">
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-300 mb-1.5" data-lang-en="Email" data-lang-es="Correo electr&oacute;nico">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-sky/50 focus:ring-1 focus:ring-brand-sky/30 transition-colors duration-200 text-sm"
+                data-placeholder-en="you@example.com" data-placeholder-es="tu@ejemplo.com" placeholder="tu@ejemplo.com">
+            </div>
+
+            <!-- Project type -->
+            <div>
+              <label for="project-type" class="block text-sm font-medium text-slate-300 mb-1.5" data-lang-en="What do you need?" data-lang-es="&iquest;Qu&eacute; necesitas?">What do you need?</label>
+              <select id="project-type" name="project_type"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-brand-sky/50 focus:ring-1 focus:ring-brand-sky/30 transition-colors duration-200 text-sm appearance-none cursor-pointer"
+                style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 fill=%22%2394a3b8%22 viewBox=%220 0 24 24%22><path d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center;">
+                <option value="" class="bg-slate-900" data-lang-en="Select an option" data-lang-es="Selecciona una opci&oacute;n">Selecciona una opci&oacute;n</option>
+                <option value="mobile-app" class="bg-slate-900" data-lang-en="Mobile Application" data-lang-es="Aplicaci&oacute;n M&oacute;vil">Aplicaci&oacute;n M&oacute;vil</option>
+                <option value="web-app" class="bg-slate-900" data-lang-en="Web Application" data-lang-es="Aplicaci&oacute;n Web">Aplicaci&oacute;n Web</option>
+                <option value="website" class="bg-slate-900" data-lang-en="Website / Landing Page" data-lang-es="P&aacute;gina Web / Landing Page">P&aacute;gina Web / Landing Page</option>
+                <option value="custom-software" class="bg-slate-900" data-lang-en="Custom Software" data-lang-es="Software a la Medida">Software a la Medida</option>
+                <option value="seo" class="bg-slate-900" data-lang-en="SEO &amp; Web Optimization" data-lang-es="SEO y Optimizaci&oacute;n Web">SEO y Optimizaci&oacute;n Web</option>
+                <option value="other" class="bg-slate-900" data-lang-en="Other" data-lang-es="Otro">Otro</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="message" class="block text-sm font-medium text-slate-300 mb-1.5" data-lang-en="Tell us about your project" data-lang-es="Cu&eacute;ntanos sobre tu proyecto">Tell us about your project</label>
+              <textarea id="message" name="message" rows="4" required
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-sky/50 focus:ring-1 focus:ring-brand-sky/30 transition-colors duration-200 text-sm resize-none"
+                data-placeholder-en="Describe your idea, goals, and any relevant details..." data-placeholder-es="Describe tu idea, objetivos y cualquier detalle relevante..." placeholder="Describe tu idea, objetivos y cualquier detalle relevante..."></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="contact-submit"
+              class="w-full bg-brand-blue hover:bg-brand-sky text-white font-medium px-8 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer text-base flex items-center justify-center gap-2">
+              <span data-lang-en="Send Message" data-lang-es="Enviar Mensaje">Enviar Mensaje</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
           </div>
-          <div>
-            <p class="text-slate-400 text-sm mb-2" data-lang-en="Send us an email at" data-lang-es="Envíanos un correo a">Send us an email at</p>
-            <a href="mailto:marvislabs26@gmail.com" class="font-heading font-semibold text-xl sm:text-2xl text-white hover:text-brand-sky transition-colors duration-200 cursor-pointer break-all">
-              marvislabs26@gmail.com
-            </a>
+        </form>
+
+        <!-- Success message (hidden by default) -->
+        <div id="form-success" class="hidden text-center py-8">
+          <div class="w-14 h-14 rounded-full bg-emerald-500/15 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
           </div>
-          <a href="mailto:marvislabs26@gmail.com" class="bg-brand-blue hover:bg-brand-sky text-white font-medium px-8 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer text-base w-full sm:w-auto" data-lang-en="Send Us a Message" data-lang-es="Envíanos un Mensaje">
-            Send Us a Message
-          </a>
+          <h3 class="font-heading font-semibold text-xl mb-2" data-lang-en="Message Sent!" data-lang-es="&iexcl;Mensaje Enviado!">Message Sent!</h3>
+          <p class="text-slate-400 text-sm" data-lang-en="We'll get back to you shortly." data-lang-es="Te responderemos pronto.">We'll get back to you shortly.</p>
         </div>
+
+        <!-- Email fallback -->
+        <p class="text-center text-slate-500 text-xs mt-6" data-lang-en="Or email us directly at" data-lang-es="O escr&iacute;benos directamente a">Or email us directly at</p>
+        <p class="text-center mt-1">
+          <a href="mailto:marvislabs26@gmail.com" class="text-slate-400 hover:text-brand-sky text-sm transition-colors duration-200 cursor-pointer">marvislabs26@gmail.com</a>
+        </p>
       </div>
     </div>
   </section>
@@ -781,7 +839,7 @@
           <a href="#projects" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
           <a href="#about" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
           <a href="#faq" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer">FAQ</a>
-          <a href="mailto:marvislabs26@gmail.com" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+          <a href="#contact" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
         </div>
       </div>
     </div>
@@ -790,15 +848,24 @@
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
     // ==== Language Toggle ====
-    let currentLang = 'en';
+    // Auto-detect browser language: default to Spanish for LATAM users
+    const browserLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+    let currentLang = browserLang.startsWith('es') ? 'es' : (browserLang.startsWith('en') ? 'en' : 'es');
 
     function setLanguage(lang) {
       currentLang = lang;
       document.documentElement.lang = lang;
 
+      // Update text content
       document.querySelectorAll('[data-lang-en]').forEach(el => {
         const text = el.getAttribute(`data-lang-${lang}`);
         if (text) el.textContent = text;
+      });
+
+      // Update placeholders on inputs/textareas
+      document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+        const ph = el.getAttribute(`data-placeholder-${lang}`);
+        if (ph) el.placeholder = ph;
       });
 
       // Update all lang labels
@@ -807,6 +874,9 @@
         el.textContent = lang.toUpperCase();
       });
     }
+
+    // Apply detected language on load
+    setLanguage(currentLang);
 
     document.getElementById('lang-toggle').addEventListener('click', () => {
       setLanguage(currentLang === 'en' ? 'es' : 'en');
@@ -883,6 +953,43 @@
           btn.setAttribute('aria-expanded', 'true');
         }
       });
+    });
+
+    // ==== Contact Form (AJAX submit) ====
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    const submitBtn = document.getElementById('contact-submit');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btnText = submitBtn.querySelector('span');
+      const originalText = btnText.textContent;
+      btnText.textContent = currentLang === 'es' ? 'Enviando...' : 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-60');
+
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok || res.status === 200) {
+          contactForm.classList.add('hidden');
+          formSuccess.classList.remove('hidden');
+          // Re-apply language to success message
+          setLanguage(currentLang);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        btnText.textContent = originalText;
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-60');
+        alert(currentLang === 'es'
+          ? 'Hubo un error al enviar. Intenta de nuevo o escríbenos a marvislabs26@gmail.com'
+          : 'There was an error sending. Please try again or email us at marvislabs26@gmail.com');
+      }
     });
   </script>
 
