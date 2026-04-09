@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marvis Labs — Software Development</title>
+  <meta name="description" content="Marvis Labs builds mobile apps, web applications, and digital platforms. We turn your ideas into powerful software.">
+  <link rel="icon" type="image/svg+xml" href="assets/marvis-icon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#020617',
+              deeper: '#0a1128',
+              navy: '#0043BC',
+              blue: '#0466EC',
+              sky: '#0FA0FB',
+              light: '#6EC8FD',
+              pale: '#90D5FC',
+              accent: '#024DCA',
+            }
+          },
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #020617; color: #f1f5f9; overflow-x: hidden; }
+
+    /* Animated gradient background for hero */
+    .hero-gradient {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(4,102,236,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(15,160,251,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(0,67,188,0.1) 0%, transparent 50%),
+        #020617;
+    }
+
+    /* Glass card */
+    .glass {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-hover:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(15, 160, 251, 0.25);
+    }
+
+    /* Glass navbar */
+    .glass-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Grid mesh subtle pattern */
+    .mesh-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: #0466EC;
+      top: 10%; left: -5%;
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: #0FA0FB;
+      top: 40%; right: -5%;
+      animation-delay: -3s;
+    }
+    .orb-3 {
+      width: 250px; height: 250px;
+      background: #024DCA;
+      bottom: 10%; left: 30%;
+      animation-delay: -5s;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(20px, -20px); }
+      66% { transform: translate(-15px, 15px); }
+    }
+
+    /* Glow line */
+    .glow-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #0FA0FB, transparent);
+      opacity: 0.3;
+    }
+
+    /* Project card image overlay */
+    .project-overlay {
+      background: linear-gradient(180deg, transparent 0%, rgba(2,6,23,0.9) 100%);
+    }
+
+    /* CTA glow button */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, #0466EC, #0FA0FB, #6EC8FD);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-glow:hover::before {
+      opacity: 1;
+    }
+
+    /* Mobile menu */
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .mobile-menu.open { max-height: 400px; }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .orb { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body class="mesh-bg">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar" class="fixed top-4 left-4 right-4 z-50 glass-nav rounded-2xl transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 cursor-pointer">
+        <img src="assets/marvis-icon.svg" alt="Marvis Labs" class="w-9 h-9">
+        <span class="font-heading font-bold text-lg tracking-tight">Marvis Labs</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+        <a href="#projects" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
+        <a href="#about" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+        <a href="#contact" class="text-sm text-slate-300 hover:text-white transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+      </div>
+
+      <!-- Language Toggle + CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <button id="lang-toggle" class="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/20" aria-label="Toggle language">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="lang-label">EN</span>
+        </button>
+        <a href="#contact" class="bg-brand-blue hover:bg-brand-sky text-white text-sm font-medium px-5 py-2 rounded-xl transition-colors duration-200 cursor-pointer" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Toggle menu">
+        <span class="block w-6 h-0.5 bg-white transition-transform duration-200 origin-center" id="bar1"></span>
+        <span class="block w-6 h-0.5 bg-white transition-opacity duration-200" id="bar2"></span>
+        <span class="block w-6 h-0.5 bg-white transition-transform duration-200 origin-center" id="bar3"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden px-4">
+      <div class="pb-4 pt-2 flex flex-col gap-3 border-t border-white/5 mt-2">
+        <a href="#services" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+        <a href="#projects" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
+        <a href="#about" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+        <a href="#contact" class="text-slate-300 hover:text-white py-2 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+        <div class="flex items-center gap-3 pt-2">
+          <button id="lang-toggle-mobile" class="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer px-3 py-1.5 rounded-lg border border-white/10" aria-label="Toggle language">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="lang-label-sync">EN</span>
+          </button>
+          <a href="#contact" class="bg-brand-blue text-white text-sm font-medium px-5 py-2 rounded-xl cursor-pointer" data-lang-en="Get in Touch" data-lang-es="Contáctanos">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center hero-gradient overflow-hidden">
+    <!-- Floating orbs -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-24 pb-20">
+      <!-- Logo icon -->
+      <div class="reveal mb-8 flex justify-center">
+        <img src="assets/marvis-icon-full.svg" alt="Marvis Labs Icon" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl shadow-2xl shadow-brand-blue/20">
+      </div>
+
+      <!-- Headline -->
+      <h1 class="reveal reveal-delay-1 font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mb-6">
+        <span data-lang-en="We Build Digital" data-lang-es="Construimos Soluciones">We Build Digital</span><br>
+        <span class="bg-gradient-to-r from-brand-blue via-brand-sky to-brand-light bg-clip-text text-transparent" data-lang-en="Solutions That Matter" data-lang-es="Digitales Que Importan">Solutions That Matter</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="reveal reveal-delay-2 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" data-lang-en="From mobile apps to web platforms, we turn your ideas into powerful, scalable software that drives real results." data-lang-es="Desde aplicaciones móviles hasta plataformas web, convertimos tus ideas en software potente y escalable que genera resultados reales.">
+        From mobile apps to web platforms, we turn your ideas into powerful, scalable software that drives real results.
+      </p>
+
+      <!-- CTAs -->
+      <div class="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contact" class="bg-brand-blue hover:bg-brand-sky text-white font-medium px-8 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer text-base" data-lang-en="Start Your Project" data-lang-es="Inicia Tu Proyecto">
+          Start Your Project
+        </a>
+        <a href="#projects" class="glass glass-hover text-white font-medium px-8 py-3.5 rounded-xl transition-all duration-200 cursor-pointer text-base" data-lang-en="View Our Work" data-lang-es="Ver Nuestro Trabajo">
+          View Our Work
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="reveal reveal-delay-3 mt-16 flex justify-center">
+        <a href="#services" class="text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer animate-bounce" aria-label="Scroll down">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-line"></div>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services" class="relative py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="What We Do" data-lang-es="Lo Que Hacemos">What We Do</p>
+        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Our Services" data-lang-es="Nuestros Servicios">Our Services</h2>
+        <p class="reveal reveal-delay-2 text-slate-400 max-w-2xl mx-auto text-lg" data-lang-en="We deliver end-to-end software solutions tailored to your business needs, from concept to launch and beyond." data-lang-es="Entregamos soluciones de software de principio a fin, adaptadas a las necesidades de tu negocio, desde el concepto hasta el lanzamiento y más allá.">
+          We deliver end-to-end software solutions tailored to your business needs, from concept to launch and beyond.
+        </p>
+      </div>
+
+      <!-- Services grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Mobile Applications -->
+        <div class="reveal glass glass-hover rounded-2xl p-7 transition-all duration-200 cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-brand-blue/15 flex items-center justify-center mb-5 group-hover:bg-brand-blue/25 transition-colors duration-200">
+            <svg class="w-6 h-6 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-lg mb-2" data-lang-en="Mobile Applications" data-lang-es="Aplicaciones Móviles">Mobile Applications</h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-lang-en="Native and cross-platform mobile apps for iOS and Android that your users will love." data-lang-es="Aplicaciones móviles nativas y multiplataforma para iOS y Android que tus usuarios amarán.">
+            Native and cross-platform mobile apps for iOS and Android that your users will love.
+          </p>
+        </div>
+
+        <!-- Web Applications -->
+        <div class="reveal reveal-delay-1 glass glass-hover rounded-2xl p-7 transition-all duration-200 cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-brand-blue/15 flex items-center justify-center mb-5 group-hover:bg-brand-blue/25 transition-colors duration-200">
+            <svg class="w-6 h-6 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-lg mb-2" data-lang-en="Web Applications" data-lang-es="Aplicaciones Web">Web Applications</h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-lang-en="Robust, scalable web platforms — from SaaS products to complex business systems." data-lang-es="Plataformas web robustas y escalables — desde productos SaaS hasta sistemas empresariales complejos.">
+            Robust, scalable web platforms — from SaaS products to complex business systems.
+          </p>
+        </div>
+
+        <!-- Web Pages -->
+        <div class="reveal reveal-delay-2 glass glass-hover rounded-2xl p-7 transition-all duration-200 cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-brand-blue/15 flex items-center justify-center mb-5 group-hover:bg-brand-blue/25 transition-colors duration-200">
+            <svg class="w-6 h-6 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-lg mb-2" data-lang-en="Web Pages" data-lang-es="Páginas Web">Web Pages</h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-lang-en="High-performance websites, landing pages, and corporate sites that convert visitors into customers." data-lang-es="Sitios web de alto rendimiento, landing pages y sitios corporativos que convierten visitantes en clientes.">
+            High-performance websites, landing pages, and corporate sites that convert visitors into customers.
+          </p>
+        </div>
+
+        <!-- Custom Software -->
+        <div class="reveal reveal-delay-3 glass glass-hover rounded-2xl p-7 transition-all duration-200 cursor-pointer group">
+          <div class="w-12 h-12 rounded-xl bg-brand-blue/15 flex items-center justify-center mb-5 group-hover:bg-brand-blue/25 transition-colors duration-200">
+            <svg class="w-6 h-6 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-lg mb-2" data-lang-en="Custom Software" data-lang-es="Software a la Medida">Custom Software</h3>
+          <p class="text-slate-400 text-sm leading-relaxed" data-lang-en="Tailored solutions designed for your unique challenges — APIs, integrations, and bespoke systems." data-lang-es="Soluciones a medida diseñadas para tus desafíos únicos — APIs, integraciones y sistemas personalizados.">
+            Tailored solutions designed for your unique challenges — APIs, integrations, and bespoke systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-line"></div>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section id="projects" class="relative py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- Section header -->
+      <div class="text-center mb-16">
+        <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="Portfolio" data-lang-es="Portafolio">Portfolio</p>
+        <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4" data-lang-en="Our Projects" data-lang-es="Nuestros Proyectos">Our Projects</h2>
+        <p class="reveal reveal-delay-2 text-slate-400 max-w-2xl mx-auto text-lg" data-lang-en="A selection of products and platforms we've brought to life." data-lang-es="Una selección de productos y plataformas que hemos dado vida.">
+          A selection of products and platforms we've brought to life.
+        </p>
+      </div>
+
+      <!-- Projects grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Rutera -->
+        <div class="reveal glass glass-hover rounded-2xl overflow-hidden transition-all duration-200 cursor-pointer group">
+          <!-- Project visual header -->
+          <div class="relative h-48 bg-gradient-to-br from-brand-navy/60 to-brand-accent/40 flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#1D52AA]/40 to-[#4192DF]/30"></div>
+            <img src="assets/rutera-icon.svg" alt="Rutera" class="relative z-10 w-24 h-24 rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs text-brand-sky bg-brand-sky/10 px-2.5 py-1 rounded-full font-medium" data-lang-en="Mobile App" data-lang-es="App Móvil">Mobile App</span>
+              <span class="text-xs text-slate-500 bg-white/5 px-2.5 py-1 rounded-full">iOS & Android</span>
+            </div>
+            <h3 class="font-heading font-semibold text-xl mb-2">Rutera</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4" data-lang-en="A personal loan management platform that helps users track, organize, and stay on top of their finances with ease." data-lang-es="Una plataforma de gestión de préstamos personales que ayuda a los usuarios a rastrear, organizar y mantener el control de sus finanzas con facilidad.">
+              A personal loan management platform that helps users track, organize, and stay on top of their finances with ease.
+            </p>
+            <div class="flex items-center gap-3">
+              <a href="https://play.google.com/store/apps/details?id=com.rutera.app&hl=es_CO" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-sm text-slate-300 hover:text-brand-sky transition-colors duration-200 cursor-pointer" aria-label="Rutera on Google Play">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302-2.302 2.302-2.794-2.302 2.794-2.302zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                Google Play
+              </a>
+              <a href="https://apps.apple.com/co/app/rutera/id6761193960" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-sm text-slate-300 hover:text-brand-sky transition-colors duration-200 cursor-pointer" aria-label="Rutera on App Store">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Muxt Decoración -->
+        <div class="reveal reveal-delay-1 glass glass-hover rounded-2xl overflow-hidden transition-all duration-200 cursor-pointer group">
+          <div class="relative h-48 bg-gradient-to-br from-amber-900/30 to-orange-800/20 flex items-center justify-center overflow-hidden">
+            <div class="flex flex-col items-center gap-2">
+              <svg class="w-14 h-14 text-amber-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span class="font-heading font-semibold text-lg text-amber-100/70">Muxt</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs text-brand-sky bg-brand-sky/10 px-2.5 py-1 rounded-full font-medium" data-lang-en="Website" data-lang-es="Sitio Web">Website</span>
+              <span class="text-xs text-slate-500 bg-white/5 px-2.5 py-1 rounded-full" data-lang-en="E-commerce" data-lang-es="E-commerce">E-commerce</span>
+            </div>
+            <h3 class="font-heading font-semibold text-xl mb-2">Muxt Decoración</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4" data-lang-en="A curated online destination for home decoration and interior design products, delivering a seamless shopping experience." data-lang-es="Un destino en línea curado para productos de decoración del hogar y diseño de interiores, ofreciendo una experiencia de compra impecable.">
+              A curated online destination for home decoration and interior design products, delivering a seamless shopping experience.
+            </p>
+            <a href="https://www.muxtdecoracion.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-sm text-slate-300 hover:text-brand-sky transition-colors duration-200 cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span data-lang-en="Visit Website" data-lang-es="Visitar Sitio">Visit Website</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Damas Group -->
+        <div class="reveal reveal-delay-2 glass glass-hover rounded-2xl overflow-hidden transition-all duration-200 cursor-pointer group">
+          <div class="relative h-48 bg-gradient-to-br from-emerald-900/30 to-teal-800/20 flex items-center justify-center overflow-hidden">
+            <div class="flex flex-col items-center gap-2">
+              <svg class="w-14 h-14 text-emerald-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+              <span class="font-heading font-semibold text-lg text-emerald-100/70">Damas Group</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs text-brand-sky bg-brand-sky/10 px-2.5 py-1 rounded-full font-medium" data-lang-en="Website" data-lang-es="Sitio Web">Website</span>
+              <span class="text-xs text-slate-500 bg-white/5 px-2.5 py-1 rounded-full" data-lang-en="Corporate" data-lang-es="Corporativo">Corporate</span>
+            </div>
+            <h3 class="font-heading font-semibold text-xl mb-2">Damas Group</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4" data-lang-en="A professional corporate web presence for Damas Group, showcasing their services and brand with a modern digital identity." data-lang-es="Una presencia web corporativa profesional para Damas Group, mostrando sus servicios y marca con una identidad digital moderna.">
+              A professional corporate web presence for Damas Group, showcasing their services and brand with a modern digital identity.
+            </p>
+            <a href="https://damasgroup.com.co/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-sm text-slate-300 hover:text-brand-sky transition-colors duration-200 cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span data-lang-en="Visit Website" data-lang-es="Visitar Sitio">Visit Website</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-line"></div>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="relative py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left: Text content -->
+        <div>
+          <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="About Us" data-lang-es="Sobre Nosotros">About Us</p>
+          <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-6" data-lang-en="Building the Future, One Line of Code at a Time" data-lang-es="Construyendo el Futuro, Una Línea de Código a la Vez">Building the Future, One Line of Code at a Time</h2>
+          <p class="reveal reveal-delay-2 text-slate-400 text-lg leading-relaxed mb-6" data-lang-en="Marvis Labs is a software development company passionate about creating digital products that solve real problems. We combine technical excellence with creative thinking to deliver solutions that exceed expectations." data-lang-es="Marvis Labs es una empresa de desarrollo de software apasionada por crear productos digitales que resuelven problemas reales. Combinamos excelencia técnica con pensamiento creativo para entregar soluciones que superan expectativas.">
+            Marvis Labs is a software development company passionate about creating digital products that solve real problems. We combine technical excellence with creative thinking to deliver solutions that exceed expectations.
+          </p>
+          <p class="reveal reveal-delay-3 text-slate-400 text-lg leading-relaxed" data-lang-en="Whether it's a mobile app, a web platform, or a custom software system — we partner with you from ideation to deployment, ensuring every project is built with quality, performance, and scalability in mind." data-lang-es="Ya sea una aplicación móvil, una plataforma web o un sistema de software personalizado — nos asociamos contigo desde la ideación hasta el despliegue, asegurando que cada proyecto se construya con calidad, rendimiento y escalabilidad en mente.">
+            Whether it's a mobile app, a web platform, or a custom software system — we partner with you from ideation to deployment, ensuring every project is built with quality, performance, and scalability in mind.
+          </p>
+        </div>
+
+        <!-- Right: Value cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="reveal glass rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand-blue/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-base mb-1.5" data-lang-en="Performance" data-lang-es="Rendimiento">Performance</h3>
+            <p class="text-slate-400 text-sm" data-lang-en="Fast, optimized, and built to scale." data-lang-es="Rápido, optimizado y construido para escalar.">Fast, optimized, and built to scale.</p>
+          </div>
+          <div class="reveal reveal-delay-1 glass rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand-blue/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-base mb-1.5" data-lang-en="Quality" data-lang-es="Calidad">Quality</h3>
+            <p class="text-slate-400 text-sm" data-lang-en="Clean code, tested, and production-ready." data-lang-es="Código limpio, probado y listo para producción.">Clean code, tested, and production-ready.</p>
+          </div>
+          <div class="reveal reveal-delay-2 glass rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand-blue/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-base mb-1.5" data-lang-en="Partnership" data-lang-es="Colaboración">Partnership</h3>
+            <p class="text-slate-400 text-sm" data-lang-en="We work alongside you, not just for you." data-lang-es="Trabajamos junto a ti, no solo para ti.">We work alongside you, not just for you.</p>
+          </div>
+          <div class="reveal reveal-delay-3 glass rounded-2xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-brand-blue/15 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold text-base mb-1.5" data-lang-en="Delivery" data-lang-es="Entrega">Delivery</h3>
+            <p class="text-slate-400 text-sm" data-lang-en="On time, on budget, no surprises." data-lang-es="A tiempo, en presupuesto, sin sorpresas.">On time, on budget, no surprises.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glow divider -->
+  <div class="glow-line"></div>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="relative py-24 sm:py-32 overflow-hidden">
+    <!-- Background accent -->
+    <div class="absolute inset-0 hero-gradient opacity-50" aria-hidden="true"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <p class="reveal text-brand-sky text-sm font-medium tracking-widest uppercase mb-3" data-lang-en="Get Started" data-lang-es="Comencemos">Get Started</p>
+      <h2 class="reveal reveal-delay-1 font-heading font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight mb-6" data-lang-en="Let's Build Something Great Together" data-lang-es="Construyamos Algo Grande Juntos">Let's Build Something Great Together</h2>
+      <p class="reveal reveal-delay-2 text-slate-400 text-lg max-w-xl mx-auto mb-10 leading-relaxed" data-lang-en="Have a project in mind? We'd love to hear about it. Reach out and let's turn your vision into reality." data-lang-es="¿Tienes un proyecto en mente? Nos encantaría saber más. Escríbenos y convirtamos tu visión en realidad.">
+        Have a project in mind? We'd love to hear about it. Reach out and let's turn your vision into reality.
+      </p>
+
+      <!-- Contact card -->
+      <div class="reveal reveal-delay-3 glass rounded-2xl p-8 sm:p-10 max-w-lg mx-auto">
+        <div class="flex flex-col items-center gap-6">
+          <div class="w-14 h-14 rounded-xl bg-brand-blue/15 flex items-center justify-center">
+            <svg class="w-7 h-7 text-brand-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <p class="text-slate-400 text-sm mb-2" data-lang-en="Send us an email at" data-lang-es="Envíanos un correo a">Send us an email at</p>
+            <a href="mailto:marvislabs26@gmail.com" class="font-heading font-semibold text-xl sm:text-2xl text-white hover:text-brand-sky transition-colors duration-200 cursor-pointer break-all">
+              marvislabs26@gmail.com
+            </a>
+          </div>
+          <a href="mailto:marvislabs26@gmail.com" class="bg-brand-blue hover:bg-brand-sky text-white font-medium px-8 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer text-base w-full sm:w-auto" data-lang-en="Send Us a Message" data-lang-es="Envíanos un Mensaje">
+            Send Us a Message
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Logo + Copy -->
+        <div class="flex items-center gap-3">
+          <img src="assets/marvis-icon.svg" alt="Marvis Labs" class="w-7 h-7">
+          <span class="font-heading font-semibold text-sm text-slate-400">Marvis Labs</span>
+          <span class="text-slate-600 text-sm">&copy; 2025</span>
+        </div>
+
+        <!-- Footer links -->
+        <div class="flex items-center gap-6">
+          <a href="#services" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Services" data-lang-es="Servicios">Services</a>
+          <a href="#projects" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
+          <a href="#about" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="About" data-lang-es="Nosotros">About</a>
+          <a href="mailto:marvislabs26@gmail.com" class="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200 cursor-pointer" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // ==== Language Toggle ====
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-lang-en]').forEach(el => {
+        const text = el.getAttribute(`data-lang-${lang}`);
+        if (text) el.textContent = text;
+      });
+
+      // Update all lang labels
+      document.getElementById('lang-label').textContent = lang.toUpperCase();
+      document.querySelectorAll('.lang-label-sync').forEach(el => {
+        el.textContent = lang.toUpperCase();
+      });
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      setLanguage(currentLang === 'en' ? 'es' : 'en');
+    });
+    document.getElementById('lang-toggle-mobile').addEventListener('click', () => {
+      setLanguage(currentLang === 'en' ? 'es' : 'en');
+    });
+
+    // ==== Mobile Menu ====
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      bar1.style.transform = menuOpen ? 'rotate(45deg) translate(4px, 4px)' : '';
+      bar2.style.opacity = menuOpen ? '0' : '1';
+      bar3.style.transform = menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : '';
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.classList.remove('open');
+        bar1.style.transform = '';
+        bar2.style.opacity = '1';
+        bar3.style.transform = '';
+      });
+    });
+
+    // ==== Scroll Reveal ====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ==== Navbar scroll effect ====
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 100) {
+        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
+  </script>
+</body>
+</html>
